@@ -7,7 +7,7 @@ var colors = [
   "rgb(255, 0, 255)"
 ]
 var squares = document.querySelectorAll(".square");
-var pickedColor = colors[2];
+var pickedColor = pickColor();
 var rgbValue = document.getElementById("rgb-value");
 var messageDisplay = document.querySelector("#message");
 
@@ -31,10 +31,16 @@ for(var i= 0; i < squares.length; i++){
   });
 }
 
-function changeColors(color){
+function changeColors(color) {
   //loop through squares
   for(var i = 0; i < squares.length; i++){
 
     squares[i].style.backgroundColor = color;
   }
+}
+
+function pickColor() {
+  var random = Math.floor(Math.random() * colors.length);
+  //this value becomes index of squares array
+  return colors[random];
 }
