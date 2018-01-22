@@ -1,15 +1,10 @@
-var colors = [
-  "rgb(255, 0, 0)",
-  "rgb(255, 255, 0)",
-  "rgb(0, 255, 0)",
-  "rgb(0, 255, 255)",
-  "rgb(0, 0, 255)",
-  "rgb(255, 0, 255)"
-]
+var colors = generateRandomColors(6);
+
 var squares = document.querySelectorAll(".square");
 var pickedColor = pickColor();
 var rgbValue = document.getElementById("rgb-value");
 var messageDisplay = document.querySelector("#message");
+var h1 = document.querySelector("h1");
 
 rgbValue.textContent = pickedColor;
 
@@ -24,9 +19,10 @@ for(var i= 0; i < squares.length; i++){
     if(clickedColor === pickedColor){
       messageDisplay.textContent = "Correct";
       changeColors(clickedColor);
+      h1.style.backgroundColor = pickedColor;
     } else {
       this.style.backgroundColor = "black";
-      messageDisplay.textContent = "Try Again";
+      messageDisplay.textContent = "Incorrect. Try Again";
     }
   });
 }
@@ -43,4 +39,23 @@ function pickColor() {
   var random = Math.floor(Math.random() * colors.length);
   //this value becomes index of squares array
   return colors[random];
+}
+
+function generateRandomColors(num) {
+  //make an array
+  var arr = [];
+  //add num random colors to arr
+  for(var i = 0; i < num; i++){
+    //get random color and push into arr
+    arr.push(randomColor());
+  }
+  return arr;
+}
+
+function randomColor() {
+  //pick a 'red', 'blue', 'green' from 0 to 255
+  var r = Math.floor(Math.random() * 256);
+  var g = Math.floor(Math.random() * 256);
+  var b = Math.floor(Math.random() * 256);
+  return "rgb(" + r + ", " + g + ", " + b + ")";
 }
