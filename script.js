@@ -1,3 +1,4 @@
+// array
 var colors = generateRandomColors(6);
 
 var squares = document.querySelectorAll(".square");
@@ -5,8 +6,23 @@ var pickedColor = pickColor();
 var rgbValue = document.getElementById("rgb-value");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
+var resetButton = document.querySelector("#reset");
 
 rgbValue.textContent = pickedColor;
+
+resetButton.addEventListener("click", function() {
+  //generate all new colors
+  colors = generateRandomColors(6);
+  //pick a new random color from array
+  pickedColor = pickColor();
+  //change rgbValue to match picked color
+  rgbValue.textContent = pickedColor;
+  //change colors of squares
+  for(var i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+  h1.style.backgroundColor = "black";
+});
 
 for(var i= 0; i < squares.length; i++){
   //add colors to squares
