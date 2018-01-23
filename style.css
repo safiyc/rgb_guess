@@ -62,6 +62,11 @@ button:hover {
   background: grey;
 }
 
+/* 'outline' can be applied directly in 'button' selector, too */
+button:focus {
+  outline:0;
+}
+
 #message {
   display: inline-block;
   width: 20%;

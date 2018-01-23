@@ -6,56 +6,85 @@ var rgbValue = document.getElementById("rgb-value");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
-var easyBtn = document.querySelector("#easyBtn");
-var hardBtn = document.querySelector("#hardBtn");
+// var easyBtn = document.querySelector("#easyBtn");
+// var hardBtn = document.querySelector("#hardBtn");
+var modeButtons = document.querySelectorAll(".mode");
 
 rgbValue.textContent = pickedColor;
 
-// bug: correct color is not always a possible choice
-easyBtn.addEventListener("click", function() {
-  easyBtn.classList.add("selected");
-  hardBtn.classList.remove("selected");
-  numOfSquares = 3;
-  colors = generateRandomColors(numOfSquares); // colors array has 3 items
-  pickedColor = pickColor();
-  rgbValue.textContent = pickedColor;
-  for(var i = 0; i < squares.length; i++) {
-    if(colors[i]) {  // if [i] has a color, then display square:
-      squares[i].style.backgroundColor = colors[i];
+for(var i = 0; i < modeButtons.length; i++) {
+  modeButtons[i].addEventListener("click", function() {
+    modeButtons[0].classList.remove("selected");
+    modeButtons[1].classList.remove("selected");
+    this.classList.add("selected");
+    if(this.textContent === "Easy"){
+      numOfSquares = 3;
     } else {
-      // blocks with no assigned colors are hidden
-      squares[i].style.display = "none";
+      numOfSquares = 6;
     }
-  }
-});
+    reset();
+  });
+}
 
-hardBtn.addEventListener("click", function() {
-  hardBtn.classList.add("selected");
-  easyBtn.classList.remove("selected");
-  numOfSquares = 6;
-  colors = generateRandomColors(numOfSquares);
-  pickedColor = pickColor();
-  rgbValue.textContent = pickedColor;
-  for(var i= 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
-    squares[i].style.display = "block";
-  }
-});
+// bug: correct color is not always a possible choice
+// easyBtn.addEventListener("click", function() {
+//   easyBtn.classList.add("selected");
+//   hardBtn.classList.remove("selected");
+//   numOfSquares = 3;
+//   colors = generateRandomColors(numOfSquares); // colors array has 3 items
+//   pickedColor = pickColor();
+//   rgbValue.textContent = pickedColor;
+//   for(var i = 0; i < squares.length; i++) {
+//     if(colors[i]) {  // if [i] has a color, then display square:
+//       squares[i].style.backgroundColor = colors[i];
+//     } else {
+//       // blocks with no assigned colors are hidden
+//       squares[i].style.display = "none";
+//     }
+//   }
+// });
+//
+// hardBtn.addEventListener("click", function() {
+//   hardBtn.classList.add("selected");
+//   easyBtn.classList.remove("selected");
+//   numOfSquares = 6;
+//   colors = generateRandomColors(numOfSquares);
+//   pickedColor = pickColor();
+//   rgbValue.textContent = pickedColor;
+//   for(var i= 0; i < squares.length; i++) {
+//     squares[i].style.backgroundColor = colors[i];
+//     squares[i].style.display = "block";
+//   }
+// });
 
-resetButton.addEventListener("click", function() {
+function reset() {
   //generate all new colors
-  colors = generateRandomColors(6);
+  colors = generateRandomColors(numOfSquares);
   //pick a new random color from array
   pickedColor = pickColor();
   //change rgbValue to match picked color
   rgbValue.textContent = pickedColor;
   //change colors of squares
   for(var i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
+    if(colors[i]){
+      squares[i].style.display = "block";
+      squares[i].style.backgroundColor = colors[i];
+    } else {
+      squares[i].style.display = "none";
+    }
   }
+  messageDisplay.textContent = "";
   h1.style.backgroundColor = "grey";
+  // resetButton.textContent = "Play Again?";
+  resetButton.textContent = "New Game";
+}
+
+//new game button
+resetButton.addEventListener("click", function() {
+  reset();
 });
 
+//outputs correct/incorrect
 for(var i= 0; i < squares.length; i++){
   //add colors to squares
   squares[i].style.backgroundColor = colors[i];
