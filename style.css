@@ -1,15 +1,20 @@
 body {
   background-color: black;
   margin: 0;
+  font-family: 'Muli', sans-serif, "Verdana";
 }
 
 .square {
   width: 30%;
-  background-color: purple;
+  background-color: grey;
   padding-bottom: 30%;
   float: left;
   margin: 1.66%;
   border-radius: 20%;
+  transition: background .5s;
+  /* 'transistion' needs these for browser compatibility  */
+  -webkit-transition: background .5s;
+  -moz-transition: background .5s;
 }
 
 #container {
@@ -20,15 +25,44 @@ body {
 h1 {
   color: white;
   text-align: center;
+  text-transform: uppercase;
+  background: grey;
+  margin: 0;
+  padding: 10px 0;
+  font-weight: normal
 }
 
 #stripe {
   background-color: white;
   height: 30px;
   text-align: center;
-  color: black
+  color: black;
 }
 
 .selected {
-  background-color: blue;
+  background-color: grey;
+  color: white;
+}
+
+button {
+  border: none;
+  background: none;
+  height: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: grey;
+  transition: background .3s;
+  /* 'transistion' needs these for browser compatibility  */
+  -webkit-transition: background .3s;
+  -moz-transition: background .3s;
+}
+
+button:hover {
+  color: white;
+  background: grey;
+}
+
+#message {
+  display: inline-block;
+  width: 20%;
 }
