@@ -71,3 +71,8 @@ button:focus {
   display: inline-block;
   width: 20%;
 }
+
+#rgb-value {
+  font-size: 50px;
+  font-weight: 800;
+}
